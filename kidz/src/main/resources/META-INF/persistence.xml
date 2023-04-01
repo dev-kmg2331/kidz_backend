@@ -4,7 +4,11 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="helloJpa">
-        <class>com.app.kidz.helloJpa.Member</class> <!-- 엔티티 클래스 패키지 경로 -->
+        <class>com.app.kidz.domain.entity.User</class> <!-- 엔티티 클래스 패키지 경로 -->
+        <class>com.app.kidz.domain.entity.PersonalInfo</class>
+        <class>com.app.kidz.domain.entity.Organization</class>
+        <class>com.app.kidz.domain.entity.Payment</class>
+        <class>com.app.kidz.domain.entity.Point</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> <!-- JDBC 드라이버 클래스 -->
