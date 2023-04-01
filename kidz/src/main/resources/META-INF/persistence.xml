@@ -16,7 +16,7 @@
             <property name="hibernate.show_sql" value="true"/> <!-- 쿼리 로그 출력 여부 -->
             <property name="hibernate.format_sql" value="true"/> <!-- 쿼리 로그를 보기 좋게 포맷팅할지 여부 -->
             <property name="hibernate.jdbc.batch_size" value="10"/> <!-- 쿼리를 버퍼링(모아서) 한번에 보내준다. -->
-            <property name="hibernate.id.new_generator_mappings" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 </persistence>
