@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Table(name = "tbl_dream_personal_info")
 public class PersonalInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "personal_info_id")
     private Long id;
 

@@ -1,6 +1,7 @@
 package com.app.kidz.helloJpa;
 
 import com.app.kidz.domain.entity.User;
+import com.app.kidz.domain.enums.MemberStatus;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,15 +23,14 @@ public class MyJpaMain {
 
         try {
 
-            User member = User.builder()
-                    .identification("HELLOJPA")
-                    .password("1234")
-                    .email("JPA@gmail.com")
-//                    .status(MemberStatus.ACTIVE)
-//                    .isAdmin(MemberStatus.NOTADMIN)
-                    .joinedAt(LocalDateTime.now()).build();
+            User user = new User();
 
-            entityManager.persist(member);
+            user.setIdentification("테스트1234");
+            user.setPassword("1234");
+            user.setEmail("테스트@gmail.com");
+            user.setJoinedAt(LocalDateTime.now());
+
+            entityManager.persist(user);
 
             entityTransaction.commit();
         } catch (Exception e) {
