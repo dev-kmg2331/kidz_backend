@@ -4,11 +4,14 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="helloJpa">
-        <class>com.app.kidz.helloJpa.Member</class> <!-- 엔티티 클래스 패키지 경로 -->
+        <class>com.app.kidz.domain.Member</class> <!-- 엔티티 클래스 패키지 경로 -->
+        <class>com.app.kidz.domain.Order</class> <!-- 엔티티 클래스 패키지 경로 -->
+        <class>com.app.kidz.domain.Item</class> <!-- 엔티티 클래스 패키지 경로 -->
+        <class>com.app.kidz.domain.OrderItem</class> <!-- 엔티티 클래스 패키지 경로 -->
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> <!-- JDBC 드라이버 클래스 -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/spring"/> <!-- DB 접속 URL -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa_test"/> <!-- DB 접속 URL -->
             <property name="javax.persistence.jdbc.user" value="root"/> <!-- DB 접속 계정 이름 -->
             <property name="javax.persistence.jdbc.password" value="1234"/> <!-- DB 접속 계정 비밀번호 -->
             <!-- 옵션 -->

@@ -1,11 +1,16 @@
-package com.app.kidz.helloJpa;
+package com.app.kidz.jpaMain;
 
+
+import com.app.kidz.domain.Member;
+import com.app.kidz.domain.Order;
+import com.app.kidz.domain.OrderStatus;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 
 @Slf4j
 public class JpaMain {
@@ -22,15 +27,25 @@ public class JpaMain {
 
         try {
 
+//            Member member = new Member();
+//            member.setName("강민구");
+//            member.setCity("서울시");
+//            member.setStreet("테헤란로");
+//            member.setZipcode("11111");
+//
+//            Order order = new Order();
+//            order.setMember(entityManager.find(Member.class, 2L));
+//            order.setOrderDate(LocalDateTime.now());
+//            order.setOrderStatus(OrderStatus.ORDER);
+//
+//            entityManager.persist(member);
+//            entityManager.persist(order);
+//
+//            Order foundOrder = entityManager.find(Order.class, 4L);
+//            foundOrder.setMember(entityManager.find(Member.class, 1L));
 
-            Member member = new Member();
+            entityManager.find(Member.class, 2L).getOrders().forEach(order -> System.out.println(order.getMember().getName()));
 
-            member.setUsername("으악");
-            member.setRoleType(RoleType.ADMIN);
-
-            entityManager.persist(member);
-
-            // 엔티티와 DB 테이블을 비교해서 create, update, validate 등의 옵션을 줄 수 있다.
             entityTransaction.commit();
         } catch (Exception e) {
             entityTransaction.rollback();
