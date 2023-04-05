@@ -1,14 +1,16 @@
 package com.app.kidz.domain.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@DiscriminatorValue("Organization")
+@Getter @Setter @NoArgsConstructor
 @Table(name = "tbl_dream_organization")
-public class Organization {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "organization_id")
-    private Long id;
+public class Organization extends Member {
 
     @Column(name = "organization_name", nullable = false)
     private String name;
@@ -27,5 +29,5 @@ public class Organization {
 
     @OneToOne
     @JoinColumn(name = "member_id")
-    private User member;
+    private Member member;
 }
