@@ -1,61 +1,47 @@
 package com.app.kidz.domain.entity;
 
-import com.app.kidz.domain.enums.MemberStatus;
-import lombok.*;
+import com.app.kidz.domain.enums.MemberRank;
+import lombok.Builder;
+import lombok.NonNull;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
-@NoArgsConstructor
-@Getter
-@Setter
 @Entity
-@Table(name = "tbl_dream_member")
-//@SequenceGenerator(name = "member_seq_generator", initialValue = 1, allocationSize = 50)
-public class User {
-
+@Builder
+@Table(name = "tbl_dream_personal_info")
+public class PersonalInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "personal_info_id")
     private Long id;
 
-    @Column(name = "member_identification", nullable = false)
-    private String identification;
+    @NonNull
+    @Column(name = "member_name", nullable = false)
+    private String name;
 
-    @Column(name = "member_pw", nullable = false)
-    private String password;
+    @NonNull
+    @Column(name = "member_nickname", nullable = false)
+    private String nickname;
 
-    @Column(name = "member_email", nullable = false)
-    private String email;
+    @NonNull
+    @Column(name = "member_mobile", nullable = false)
+    private String mobile;
 
-    @Column(name = "member_status", nullable = false)
+    @NonNull
+    @Column(name = "member_address", nullable = false)
+    private String address;
+
     @Enumerated(EnumType.STRING)
-    private MemberStatus status;
+    @Column(name = "member_rank")
+    private MemberRank rank;
 
-    @Column(name = "is_admin", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private MemberStatus isAdmin;
-
-    @Column(name = "joined_at", updatable = false)
-    private LocalDateTime joinedAt;
-
-    @OneToOne(mappedBy = "member")
-    private PersonalInfo personalInfo;
-
-    @OneToMany(mappedBy = "member")
-    private List<Payment> paymentList;
-
-    @OneToMany(mappedBy = "member")
-    private List<Point> pointList;
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private User member;
 
     @PrePersist
-    private void prePersist() {
-        if (this.status == null) {
-            this.status = MemberStatus.ACTIVE;
-        }
-        if (this.isAdmin == null) {
-            this.isAdmin = MemberStatus.NOT_ADMIN;
+    public void prePersist(){
+        if(this.rank == null){
+            this.rank = MemberRank.BRONZE;
         }
     }
 }
