@@ -1,6 +1,7 @@
 package com.app.kidz.jpaMain;
 
 
+import com.app.kidz.domain.Book;
 import com.app.kidz.domain.Member;
 import com.app.kidz.domain.Order;
 import com.app.kidz.domain.OrderStatus;
@@ -27,27 +28,36 @@ public class JpaMain {
 
         try {
 
-//            Member member = new Member();
-//            member.setName("강민구");
-//            member.setCity("서울시");
-//            member.setStreet("테헤란로");
-//            member.setZipcode("11111");
-//
-//            Order order = new Order();
-//            order.setMember(entityManager.find(Member.class, 2L));
-//            order.setOrderDate(LocalDateTime.now());
-//            order.setOrderStatus(OrderStatus.ORDER);
-//
-//            entityManager.persist(member);
-//            entityManager.persist(order);
-//
-//            Order foundOrder = entityManager.find(Order.class, 4L);
-//            foundOrder.setMember(entityManager.find(Member.class, 1L));
+            Member member = new Member();
+            member.setName("한동석");
+            member.setCity("서울특별시");
+            member.setStreet("테헤란로");
+            member.setZipcode("00001");
+            entityManager.persist(member);
 
-            entityManager.find(Member.class, 2L).getOrders().forEach(order -> System.out.println(order.getMember().getName()));
+            entityManager.flush();
+            entityManager.clear();
+
+            Order order = new Order();
+            order.setMember(member);
+            order.setOrderDate(LocalDateTime.now());
+            order.setOrderStatus(OrderStatus.ORDER);
+
+            entityManager.persist(order);
+
+            entityManager.flush();
+            entityManager.clear();
+
+            Member findMember = entityManager.find(Member.class, member.getId());
+
+//            System.out.println(findMember.getOrders().getClass());
+//            findMember.getOrders().forEach(e -> System.out.println("===== order : " + e.getClass()));
+
+//            System.out.println("===========order member : " + entityManager.find(Order.class, 4L).getMember().getClass());
 
             entityTransaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             entityTransaction.rollback();
         } finally {
             entityManager.close();
